@@ -38,13 +38,13 @@ def main():
     # File editing mode
     if args.file:
         if not os.path.exists(args.file):
-            print(f"❌ File {args.file} does not exist.")
+            print(f"File {args.file} does not exist.")
             return
 
         # Backup original file
         backup_path = args.file + ".bak"
         shutil.copy(args.file, backup_path)
-        print(f"📦 Backup created: {backup_path}")
+        print(f"Backup created: {backup_path}")
 
         with open(args.file, "r") as f:
             code = f.read()
@@ -53,7 +53,7 @@ def main():
 
         # Use streaming if supported and enabled
         if not args.no_stream and hasattr(assistant, "stream"):
-            print("\n🧠 Streaming suggested code edits:\n")
+            print("\nStreaming suggested code edits:\n")
             suggested_code = ""
             for chunk in assistant.stream(full_prompt):
                 print(chunk, end="", flush=True)
@@ -61,27 +61,27 @@ def main():
             print()  # newline at end
         else:
             suggested_code = assistant.ask(full_prompt)
-            print("\n🧠 Suggested code edits:\n")
+            print("\nSuggested code edits:\n")
             print(suggested_code)
 
         # Apply edits if --yes is specified
         if args.yes:
             with open(args.file, "w") as f:
                 f.write(suggested_code)
-            print(f"\n✅ Changes applied to {args.file}")
+            print(f"\nChanges applied to {args.file}")
         else:
-            print("\n⚠️ Use --yes to automatically apply edits.")
+            print("\nUse --yes to automatically apply edits.")
 
     # Normal CLI prompt mode (no file)
     else:
         if not args.no_stream and hasattr(assistant, "stream"):
-            print("\n🧠 Streaming response:\n")
+            print("\nStreaming response:\n")
             for chunk in assistant.stream(full_prompt):
                 print(chunk, end="", flush=True)
             print()
         else:
             response = assistant.ask(full_prompt)
-            print("\n🧠 Assistant:\n")
+            print("\nAssistant:\n")
             print(response)
 
 
