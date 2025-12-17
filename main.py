@@ -1,6 +1,6 @@
-import argparse
-import os
-import shutil
+import argparse # Used to handle command line arguements
+import os       # used for file path and environment operations
+import shutil   # used to make backups of files
 import sys
 from assistant.gemini_client import GeminiClient
 from assistant.openai_client import OpenAIClient
