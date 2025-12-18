@@ -1,12 +1,12 @@
 import argparse # Used to handle command line arguements
 import os       # used for file path and environment operations
 import shutil   # used to make backups of files
-import sys
+import sys      # for system related functions
 from assistant.gemini_client import GeminiClient
 from assistant.openai_client import OpenAIClient
 from assistant.ollama_client import OllamaClient
 from assistant.claude_client import ClaudeClient
-from assistant.prompts import SYSTEM_PROMPT
+from assistant.prompts import SYSTEM_PROMPT # default instructions for the AI
 
 # Map model names to their client classes
 MODEL_MAP = {
@@ -17,6 +17,7 @@ MODEL_MAP = {
 }
 
 def main():
+    # Setup command line argument parsing
     parser = argparse.ArgumentParser(description="Full Code Editing Agent CLI")
     parser.add_argument("prompt", help="Ask the assistant to edit your code")
     parser.add_argument("--model", choices=MODEL_MAP.keys(), default="gemini",
